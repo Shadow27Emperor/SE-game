@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>White Room</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: white;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* Room */
+#room {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Portal */
+#portal {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid black;
+    padding: 20px 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Input box */
+#inputBox {
+    position: absolute;
+    bottom: 120px;
+    left: 20px;
+    background: black;
+    padding: 10px;
+}
+
+#inputBox input {
+    width: 40px;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* Controls */
+#controls {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    padding: 15px 20px;
+    font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="room">
+    <div id="portal">COMING SOON</div>
+
+    <div id="inputBox">
+        <input type="text" id="codeInput" maxlength="1">
+    </div>
+
+    <div id="controls">
+        <button onclick="move('left')">◀</button>
+        <button onclick="move('forward')">▲</button>
+        <button onclick="move('right')">▶</button>
+    </div>
+</div>
+
+<script>
+let roomNumber = 1;
+const roomCodes = ["E","A","R","N","I","X","O","S"]; // example 8 rooms
+
+function move(direction) {
+    console.log("Moved:", direction);
+}
+
+document.getElementById("codeInput").addEventListener("input", function () {
+    const value = this.value.toUpperCase();
+    this.value = value;
+
+    if (value === roomCodes[roomNumber - 1]) {
+        nextRoom();
+    }
+});
+
+function nextRoom() {
+    if (roomNumber < 8) {
+        roomNumber++;
+        document.getElementById("portal").innerText = "ROOM " + roomNumber;
+        document.getElementById("codeInput").value = "";
+        alert("Room Unlocked");
+    } else {
+        alert("You Win ₹500");
+    }
+}
+</script>
+
+</body>
+</html>
